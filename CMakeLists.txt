@@ -44,13 +44,13 @@ mlir_tablegen(MyDialect.h.inc   -gen-dialect-decls -I ${TD_DIR})
 mlir_tablegen(MyDialect.cpp.inc -gen-dialect-defs  -I ${TD_DIR})
 mlir_tablegen(MyOps.h.inc       -gen-op-decls      -I ${TD_DIR})
 mlir_tablegen(MyOps.cpp.inc     -gen-op-defs       -I ${TD_DIR})
+add_public_tablegen_target(MyIncGen)
 
 set(LLVM_TARGET_DEFINITIONS ${TD_DIR}/NPUOps.td)
 mlir_tablegen(NPUDialect.h.inc   -gen-dialect-decls -I ${TD_DIR})
 mlir_tablegen(NPUDialect.cpp.inc -gen-dialect-defs  -I ${TD_DIR})
 mlir_tablegen(NPUOps.h.inc       -gen-op-decls      -I ${TD_DIR})
 mlir_tablegen(NPUOps.cpp.inc     -gen-op-defs       -I ${TD_DIR})
-
 add_public_tablegen_target(NPUIncGen)
 
 add_library(NPUDialect
@@ -61,7 +61,7 @@ add_library(NPUDialect
   lib/LowerMyToNPU.cpp
   lib/NPUTiling.cpp
 )
-add_dependencies(NPUDialect NPUIncGen)
+add_dependencies(NPUDialect MyIncGen NPUIncGen)
 
 target_include_directories(NPUDialect PUBLIC ${PROJECT_BINARY_DIR})
 
