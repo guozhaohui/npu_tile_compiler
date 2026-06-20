@@ -18,13 +18,6 @@ C-like trace
 ## Requirements (Debian / Ubuntu)
 
 ```bash
-which llvm
-which llvm_ar
-cd /usr/
-ls
-cd bin/
-ls
-cd ~
 sudo apt install llvm-22 llvm-22-dev  mlir-22-tools mlir-22-dev clang-22 cmake ninja-build
 sudo apt install lsb-release
 sudo apt install gpg
